@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:personal_asst_gemini/api/api_key.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../widgets/bubble_chat.dart';
 
@@ -14,7 +13,15 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   dotenv.load();
+  // }
+
+  final model = GenerativeModel(model: 'gemini-pro', apiKey: dotenv.env['GEMINI_API_KEY']!);
   TextEditingController messageController = TextEditingController();
 
   // final prompt = 'Write a story about a magic backpack.';
@@ -42,7 +49,7 @@ class _ChatPageState extends State<ChatPage> {
           ),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text('Hera AI', style: TextStyle(color: Colors.white)),
+        title: const Text('Personal Assistant Gemini AI', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blueGrey,
       ),
       body: Column(
